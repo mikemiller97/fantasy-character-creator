@@ -1,0 +1,7 @@
+.options {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 15px;
+    list-style-type: none;
+    border-bottom: 1px black solid;
+}
