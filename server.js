@@ -53,7 +53,7 @@ app.use((error, req, res, next) => {
 })
 
 mongoose
-    .connect(process.env.ATLAS_URI)
+    .connect(process.env.ATLAS_URI, { useNewUrlParser: true })
     .then(() => {
         app.listen(app.get("port"), function(){
             console.log("Express server listening on port " + app.get("port"));
