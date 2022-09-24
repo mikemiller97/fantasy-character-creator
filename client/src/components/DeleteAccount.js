@@ -11,42 +11,14 @@ export default function DeleteAccount(props) {
     let navigate = useNavigate() 
     
     const [isLoading, setIsLoading] = React.useState(false)
-    const [characterList, setCharacterList] = React.useState([])
     const [submitted, setSubmitted] = React.useState(0)
     const [serverError, setServerError] = React.useState(0)
     const [accountDeleted, setAccountDeleted] = React.useState(false)
 
-    // Fuction to load list of characters
-    const loadCharacters = useCallback(async (e) => {
+     // Function to delete character
+     const deleteCharacter = useCallback(async (cid) => {
         try {
-            const response = await fetch(`/api/characters/userid/${auth.userId}`, {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: "Bearer " + auth.token
-                }
-            })
-            const responseData = await response.json()
-                
-            // Displays error to front end
-            if (!response.ok) {
-                throw new Error(responseData.message)
-            }
-                
-            setCharacterList(responseData.characters)
-            console.log(responseData.charaters)
-        } catch (err) {
-            if (err.message.includes("is not valid JSON")) {
-                err.message = "Error: could not connect to server"
-            }
-
-            setServerError(err.message || "Something went wrong please try again")
-        }
-    }, [auth.token, auth.userId])
-
-    // Function to delete character
-    const deleteCharacter = useCallback(async (cid) => {
-        try {
-            const response = await fetch(`/api/characters/${cid}`, {
+            const response = await fetch(`/api/characters/withaccount/${cid}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -65,24 +37,47 @@ export default function DeleteAccount(props) {
 
             setServerError(err.message || "Something went wrong please try again")
         }
-        setCharacterList(characterList.filter(character => character.id !== cid))
-    }, [auth.token, characterList])
+    }, [auth.token])
+
+    // Fuction to load list of characters
+    const loadCharacters = useCallback(async (e) => {
+        try {
+            const response = await fetch(`/api/characters/userid/${auth.userId}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + auth.token
+                }
+            })
+            const responseData = await response.json()
+                
+            // Displays error to front end
+            if (!response.ok) {
+                throw new Error(responseData.message)
+            }
+
+            //Deletes characters
+            responseData.characters.forEach((character) => {
+                deleteCharacter(character.id)
+            })
+
+        } catch (err) {
+            if (err.message.includes("is not valid JSON")) {
+                err.message = "Error: could not connect to server"
+            }
+
+            setServerError(err.message || "Something went wrong please try again")
+        }
+    }, [auth.token, auth.userId, deleteCharacter])
 
 
     // Handles server request
-    const handleSubmit = useCallback(async (e) => {
-        e.preventDefault()
+    const handleSubmit = useCallback(async () => {
         setIsLoading(true)
         setSubmitted((prev) => prev++)
-        // Gets list of characters
+        // Gets list of characters and deletes them
         loadCharacters()
-
-        // Deletes characters
-        characterList.forEach((character) => {
-            deleteCharacter(character.id)
-        })
-
-        // Deletes account
+    
+        //Deletes account
         try {
             const response = await fetch(`/api/users/${auth.userId}`, {
                 method: "DELETE",
@@ -108,17 +103,19 @@ export default function DeleteAccount(props) {
             setServerError(err.message || "Something went wrong please try again")
         }
         setIsLoading(false)
-    }, [auth.token, auth.userId, characterList, deleteCharacter, loadCharacters])
+    }, [auth.token, auth.userId, loadCharacters])
 
     // Sends http request
     useEffect(() => {   
         if (!auth.loggedIn) {
             navigate("/login")
         }
-
+        if (submitted < 1) {
+            return
+        }
         handleSubmit()
 
-    }, [submitted, auth.loggedIn, navigate, handleSubmit])
+    }, [auth.loggedIn, navigate, handleSubmit, submitted])
 
     // Logs out user when account is deleted
     useEffect(() => {
@@ -153,7 +150,7 @@ export default function DeleteAccount(props) {
             /> : null}
             {serverError && ! accountDeleted ? <p>{(serverError)}</p> : null}
             {accountDeleted ? 
-                <div className="account-deleted-notice">
+                <div className={auth.darkMode ? "account-deleted-notice" : "account-deleted-notice-light"}>
                     <p>Your account has been deleted.</p>
                 </div>
             : null}

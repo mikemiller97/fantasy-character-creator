@@ -147,6 +147,7 @@ const patchCharacter = async (req, res, next) => {
     res.status(200).json({ updatedCharacter: updatedCharacter.toObject( {getters: true }) })
 }
 
+// Deletes character while still preserving user list of characters
 const deleteCharacter = async (req, res, next) => {
     const characterId = req.params.cid
     let character
@@ -167,7 +168,7 @@ const deleteCharacter = async (req, res, next) => {
         const sess = await mongoose.startSession()
         sess.startTransaction()
         if (character.publicId.length > 1) {
-            cloudinary.uploader.destroy(character.publicId)
+            console.log(await cloudinary.uploader.destroy(character.publicId))
         }
         await character.remove({ session: sess })
         character.creator.characters.pull(character)
@@ -181,4 +182,40 @@ const deleteCharacter = async (req, res, next) => {
     res.status(200).json({message: "Deleted character"})
 }
 
-module.exports = {getCharactersByUserId, getCharacterByCharacterId, postCharacter, patchCharacter, deleteCharacter}
+// Deletes characters in case of an account deletion
+const deleteCharacterBlind = async (req, res, next) => {
+    const characterId = req.params.cid
+    let character
+
+    try {
+        character = await Character.findById(characterId)
+    } catch (err) {
+        const error = new HttpError("Something went wrong, could not delete character", 500)
+        return next(error)
+    }
+
+    if (!character) {
+        const error = new HttpError("Could not find character for this ID", 404)
+        return next(error)
+    }
+
+    if (character.publicId.length > 1) {
+        try {
+            await cloudinary.uploader.destroy(character.publicId)
+        } catch (err) {
+            const error = new HttpError("Something went wrong, could not delete character", 500)
+            return next(error)
+        }
+    }
+
+    try {
+        await Character.findByIdAndRemove(characterId)
+    } catch (err) {
+        const error = new HttpError("Something went wrong, could not delete character", 500)
+        return next(error)
+    }
+
+    res.status(200).json({message: "Deleted character"})
+}
+
+module.exports = {getCharactersByUserId, getCharacterByCharacterId, postCharacter, patchCharacter, deleteCharacter, deleteCharacterBlind}

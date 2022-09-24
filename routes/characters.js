@@ -1,7 +1,7 @@
 const express = require("express")
 const { check } = require("express-validator")
 
-const {getCharactersByUserId, postCharacter, patchCharacter, deleteCharacter, getCharacterByCharacterId} = require("../controllers/characters-controller")
+const {getCharactersByUserId, postCharacter, patchCharacter, deleteCharacter, getCharacterByCharacterId, deleteCharacterBlind} = require("../controllers/characters-controller")
 const checkAuth = require('../middleware/check-auth')
 
 const router = express.Router()
@@ -17,6 +17,7 @@ router.post("/", check("name").not().isEmpty(),
 
 router.patch("/:cid", check("name").not().isEmpty(), patchCharacter)
 
+router.delete("/withaccount/:cid", deleteCharacterBlind)
 router.delete("/:cid", deleteCharacter)
 
 module.exports = router
