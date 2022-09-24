@@ -26,7 +26,7 @@ app.use(cors())
 app.set("port", process.env.PORT || "5000")
 
 // Serves React web page
-app.get("/", (req, res, next) => {
+app.get("/api", (req, res, next) => {
     res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 
