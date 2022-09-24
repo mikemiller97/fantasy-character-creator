@@ -1,0 +1,21 @@
+.settings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    height: 100vh;
+}
+
+.settings-light {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    background-color: #DEE4E7;
+    color: black;
+    height: 100vh;
+}
+
+.settings-title-light {
+    color: black;
+}

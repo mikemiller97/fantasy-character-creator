@@ -1,7 +1,55 @@
+.navbar {
+    margin: 0%;
+}
+
 .options {
     display: flex;
     justify-content: space-between;
-    margin-right: 15px;
+    padding-right: 15px;
+    list-style-type: none;
+    border-bottom: 1px white solid;
+    background-color: black;
+    margin-top: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.options-light {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 15px;
     list-style-type: none;
     border-bottom: 1px black solid;
+    background-color: white;
+    margin-top: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 1px 1px lightgrey;
+}
+
+.options li {
+    color: white;
+    text-decoration: none;
+    padding: 5px;
+    font-size: 18px;
+}
+
+.options-light li {
+    color: black;
+    text-decoration: none;
+    padding: 5px;
+    font-size: 18px;
+    border-radius: 2%;
+}
+
+.options li:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.options-light li:hover {
+    background-color: lightgray;
+    color: black;
+    cursor: pointer;
 }
