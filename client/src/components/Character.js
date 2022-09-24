@@ -32,6 +32,7 @@ export default function Character(props) {
     }
 
     useEffect(() => {
+        // Adjusts appearance if bio is short
         if (props.bio.length > 140) {
             setShortBio(props.bio.slice(0, 140)+ "...")
         }

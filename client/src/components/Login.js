@@ -20,7 +20,7 @@ export default function Login() {
 
     return (
         <div className="page-and-image">
-                <img className ="elf" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b6acac55-3665-489e-a677-141a48b0ebd5/d2wbgvp-02e547e6-9017-41cd-b67c-ef4d040aadeb.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2I2YWNhYzU1LTM2NjUtNDg5ZS1hNjc3LTE0MWE0OGIwZWJkNVwvZDJ3Ymd2cC0wMmU1NDdlNi05MDE3LTQxY2QtYjY3Yy1lZjRkMDQwYWFkZWIuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.7fjjO0cwnRbRZBRYTTtLo9vqcG1_whuXGxBKWXYTqBM" alt="a drawing of an elf" />
+                <img className ="elf" src="https://i.imgur.com/Ep3S3lV.jpg" alt="a drawing of an elf" />
             <div className={auth.darkMode ? "login-page": "login-page-light"}>
                 <div className="login-text">
                     <h1 className="title" style={auth.darkMode ? {color: "white"} : {color: "black"}}>Fantasy Character Creator</h1>

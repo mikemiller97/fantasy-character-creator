@@ -102,13 +102,11 @@ const patchCharacter = async (req, res, next) => {
     if (!errors.isEmpty()) {
         throw new HttpError("Invalid input, please check your input", 422)
     }
-
-    console.log(req.body)
     
     const { name, race, sex, profession, playerClass, picture, bio, alignment, age, publicId, pictureChanged, oldPublicId } = req.body
     const characterId = req.params.cid
 
-    if (pictureChanged) {
+    if (pictureChanged && oldPublicId !== "") {
         try {
             await cloudinary.uploader.destroy(oldPublicId)
         } catch (err) {
@@ -168,7 +166,7 @@ const deleteCharacter = async (req, res, next) => {
         const sess = await mongoose.startSession()
         sess.startTransaction()
         if (character.publicId.length > 1) {
-            console.log(await cloudinary.uploader.destroy(character.publicId))
+            await cloudinary.uploader.destroy(character.publicId)
         }
         await character.remove({ session: sess })
         character.creator.characters.pull(character)

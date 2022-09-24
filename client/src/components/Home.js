@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react"
+import React, { useEffect, useContext, useCallback } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../context/auth-context"
 import { CirclesWithBar } from 'react-loader-spinner'
@@ -44,7 +44,7 @@ export default function Home() {
         setShowWarning(false)
     }
 
-    const loadCharacters = async (e) => {
+    const loadCharacters = useCallback(async (e) => {
         setIsLoading(true)
 
         try {
@@ -72,7 +72,7 @@ export default function Home() {
         setShowWarning(false)
         setIsLoading(false)
         setCharacterListChange(prev => prev++)
-    }
+    },[auth.token, auth.userId])
 
     const cancelDelete = () => {
         setSelectedDelete("")
@@ -85,7 +85,7 @@ export default function Home() {
         }
 
        loadCharacters()
-    }, [auth.loggedIn, characterListChange])
+    }, [auth.loggedIn, characterListChange, loadCharacters, navigate])
 
     return (
         <div className={auth.darkMode ? "home-page" : "home-page-light"}>

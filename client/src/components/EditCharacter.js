@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react"
+import React, { useEffect, useContext, useCallback } from "react"
 import { CirclesWithBar } from 'react-loader-spinner'
 import { useNavigate, useLocation } from "react-router-dom"
 import Axios from "axios"
@@ -25,7 +25,7 @@ export default function EditCharacter(props) {
     const characterId = location.pathname.replace("/edit/", "")
     
     // Loads character data
-    const loadData = async () => {
+    const loadData = useCallback(async () => {
         setSubmitted(prev => prev++)
         setIsLoading(true)
         try {
@@ -62,7 +62,7 @@ export default function EditCharacter(props) {
             setServerError(err.message || "Something went wrong please try again")
         }
         setIsLoading(false)
-    }
+    }, [auth.token, characterId])
 
     const handleChange = (event) => {
         const {name, value} = event.target
@@ -85,7 +85,6 @@ export default function EditCharacter(props) {
         setIsLoading(true)
         console.log(formData)
 
-        //let pictureToUse = formData.picture
         let pictureToUse
         formData.picture === "https://i.imgur.com/PknKFnO.jpg" ? pictureToUse = "" : pictureToUse = formData.picture
         let publicId = formData.publicId
@@ -95,10 +94,10 @@ export default function EditCharacter(props) {
         if (imageSelected) {
             const formDataUp = new FormData()
             formDataUp.append("file", imageSelected)
-            formDataUp.append("upload_preset", "fantasy")
+            formDataUp.append("upload_preset", "qluhqdc0")
 
             try {
-                const response = await Axios.post("https://api.cloudinary.com/v1_1/dyji4fhsv/image/upload", formDataUp)
+                const response = await Axios.post("https://api.cloudinary.com/v1_1/dcuxfftot/image/upload", formDataUp)
                 console.log(response)
 
                 pictureToUse = response.data.secure_url
@@ -175,7 +174,7 @@ export default function EditCharacter(props) {
         }
         fileReader.readAsDataURL(imageSelected)
 
-    }, [submitted, imageSelected])
+    }, [submitted, imageSelected, auth.loggedIn, loadData, navigate])
 
     // Sets picture to a default blank one if one was never uploaded
     useEffect(() => {

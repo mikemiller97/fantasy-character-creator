@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react"
+import React, {useEffect} from "react"
 import { CirclesWithBar } from 'react-loader-spinner'
 import { useNavigate } from "react-router-dom"
 import Axios from "axios"
@@ -74,7 +74,6 @@ export default function Create() {
                 }
             }
             
-
         try {
             const response = await fetch("/api/characters/", {
                 method: "POST",
@@ -113,8 +112,8 @@ export default function Create() {
             }
             setIsLoading(false)
     }
-
-    const handleFileUplad = (event) => {
+    
+    const handleFileUpload = (event) => {
         hiddenFileInput.current.click();
     }
     
@@ -130,7 +129,7 @@ export default function Create() {
             setPreviewUrl(fileReader.result)
         }
         fileReader.readAsDataURL(imageSelected)
-    }, [imageSelected])
+    }, [auth.loggedIn, imageSelected, navigate])
     
     return (
         <div className="character-creation">
@@ -156,7 +155,7 @@ export default function Create() {
                     ref={hiddenFileInput}
                     style={{display: "none"}}
                 />
-                <button className="button-4" type="button" onClick={handleFileUplad}>Upload a file</button> 
+                <button className="button-4" type="button" onClick={handleFileUpload}>Upload a file</button> 
                 <label htmlFor="age">Age (in years)</label>
                 <input 
                     type="number"
