@@ -43,6 +43,11 @@ app.use((req, res, next) => {
     return next(error)
 })
 
+// final catch-all route to index.html defined last 
+app.get('*', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+  });
+
 // Error handler
 app.use((error, req, res, next) => {
     if (res.headersSent) {
