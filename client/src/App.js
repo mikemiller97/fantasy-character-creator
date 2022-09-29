@@ -18,7 +18,9 @@ import EditCharacter from './components/EditCharacter';
 let logoutTimer
 
 function App() {
-  const [token, setToken] = React.useState(false)
+  const initializeState = () => !!JSON.parse(localStorage.getItem("userData"));
+
+  const [token, setToken] = React.useState(initializeState)
   const [userId, setUserId] = React.useState(null)
   const [tokenExpirationDate, setTokenExpirationDate] = React.useState()
   const [darkMode, setDarkMode] = React.useState(true)
@@ -73,8 +75,8 @@ function App() {
             <Route path="/edit/:id" element={<EditCharacter />} />
             <Route path="/create" element={<Create />} />
             <Route path="/settings" element={<Settings />} />
-            <Route path="/login" element={<Login />} />
             <Route path="/character" element={<Character />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/" element={<Home />} />
           </Routes>
         </Router>

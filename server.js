@@ -26,7 +26,7 @@ app.use(cors())
 app.set("port", process.env.PORT || "8888")
 
 // Serves React web page
-app.get("/api", (req, res, next) => {
+app.get("/", (req, res, next) => {
     res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 
@@ -42,11 +42,6 @@ app.use((req, res, next) => {
     const error = new HttpError("Error: page not found", 404)
     return next(error)
 })
-
-// final catch-all route to index.html defined last 
-app.get('*', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
-  });
 
 // Error handler
 app.use((error, req, res, next) => {
