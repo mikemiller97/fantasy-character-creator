@@ -69,14 +69,14 @@ function App() {
         value={{ userId : userId, loggedIn : !!token, token: token, darkMode: darkMode, login: login, logout: logout, setDarkMode: setDarkMode }}>
         <Router>
         {token ? <Nav /> : null}
-          <Routes>
+          {token && <Routes>
             <Route path="/edit/:id" element={<EditCharacter />} />
             <Route path="/create" element={<Create />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/login" element={<Login />} />
             <Route path="/character" element={<Character />} />
             <Route path="/" element={<Home />} />
-          </Routes>
+          </Routes>}
         </Router>
       </AuthContext.Provider>
     </div>
