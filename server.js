@@ -39,8 +39,9 @@ app.use("/api/users", userRoutes)
 
 // 404 error when no route matches
 app.use((req, res, next) => {
-    const error = new HttpError("Error: page not found", 404)
-    return next(error)
+    app.get("/", (req, res, next) => {
+        res.sendFile(path.join(__dirname + "/client/build/index.html"));
+    });
 })
 
 // Error handler
