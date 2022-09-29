@@ -31,7 +31,7 @@ export default function Login() {
                 <div className="login-buttons">
                     {/* Tertiary operator prevents the button from working when a different form is up */}
                     <button className={auth.darkMode ? "button-6": "button-18"} onClick={showSignUp ? () => {return} : () => setShowLogin(true)}>Log in</button>
-                    <p>――― or ―――</p>
+                    <p>or</p>
                     {/* Tertiary operator prevents the button from working when a different form is up */}
                     <button className={auth.darkMode ? "button-6": "button-18"} onClick={showLogin ? () => {return} : () => setShowSignUp(true)}>Sign Up</button>
                 </div>

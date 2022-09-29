@@ -41,11 +41,12 @@ export default function EditCharacter(props) {
                 throw new Error(responseData.message)
             }
             setCharacter(responseData.character)
+            console.log(responseData.character)
             setFormData({
                 name: responseData.character.name,
                 picture: responseData.character.picture,
                 age: responseData.character.age,
-                race: responseData.character.reace,
+                race: responseData.character.race,
                 sex: responseData.character.sex,
                 profession: responseData.character.profession,
                 playerClass: responseData.character.playerClass,
@@ -98,8 +99,6 @@ export default function EditCharacter(props) {
 
             try {
                 const response = await Axios.post("https://api.cloudinary.com/v1_1/dcuxfftot/image/upload", formDataUp)
-                console.log(response)
-
                 pictureToUse = response.data.secure_url
                 publicId = response.data.public_id
                 pictureChanged = true
@@ -238,7 +237,7 @@ export default function EditCharacter(props) {
                         onChange={handleChange}
                         name="sex"
                         id="sex"
-                        vale={formData.sex}
+                        value={formData.sex}
                         placeholder="Male"
                     />
                     <label htmlFor="profession">Profession </label>
@@ -260,12 +259,14 @@ export default function EditCharacter(props) {
                         placeholder="Priest"
                     />
                     <label>Alignment </label>
-                    <select className="alignment-select" name="alignmentLaw" id="alignmentLaw" onChange={handleChange}>
+                    <select className="alignment-select" value={formData.alignmentLaw} name="alignmentLaw" id="alignmentLaw" onChange={handleChange}>
+                        <option value="">--</option>
                         <option value="Lawful">Lawful</option>
                         <option value="Neutral">Neutral</option>
                         <option value="Chaotic">Chaotic</option>
                     </select>
-                    <select className="alignment-select" name="alignmentMoral" id="alignmentMoral" onChange={handleChange}>
+                    <select className="alignment-select" value={formData.alignmentMoral} name="alignmentMoral" id="alignmentMoral" onChange={handleChange}>
+                        <option value="">--</option>
                         <option value="Good">Good</option>
                         <option value="Neutral">Neutral</option>
                         <option value="Evil">Evil</option>
@@ -275,7 +276,7 @@ export default function EditCharacter(props) {
                         onChange={handleChange}
                         name="bio"
                         id="bio"
-                        value={formData.value}
+                        value={formData.bio}
                         placeholder="Once upon a time..."
                     />
                     <button className={auth.darkMode ? "button-4": "button-18"}>Submit</button>

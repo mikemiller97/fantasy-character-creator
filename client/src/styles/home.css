@@ -1,21 +1,23 @@
 .home-page {
     background-color: #121212;
     color: white;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     gap: 10px;
     align-items: center;
+    overflow-y: scroll;
+    margin-bottom: 10px;
 }
 
 .home-page-light {
     background-color: #DEE4E7;
     color: black;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     gap: 10px;
     align-items: center;
+    overflow-y: scroll;
+    margin-bottom: 10px;
 }
 
 .characters {

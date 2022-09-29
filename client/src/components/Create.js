@@ -180,7 +180,7 @@ export default function Create() {
                     onChange={handleChange}
                     name="sex"
                     id="sex"
-                    vale={formData.sex}
+                    value={formData.sex}
                     placeholder="Male"
                 />
                 <label htmlFor="profession">Profession </label>

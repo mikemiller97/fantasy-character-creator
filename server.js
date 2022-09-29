@@ -11,7 +11,7 @@ const HttpError = require("./models/http-error")
 // Path to environmental variables
 require('dotenv').config({ path: path.resolve(__dirname, './config/dev.env')})
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 8888
 
 const app = express()
 
@@ -23,7 +23,7 @@ app.use(bodyParser.json())
 // Alows cors requests from browser
 app.use(cors())
 
-app.set("port", process.env.PORT || "5000")
+app.set("port", process.env.PORT || "8888")
 
 // Serves React web page
 app.get("/api", (req, res, next) => {

@@ -39,6 +39,12 @@
     border: solid black 1px;
 }
 
+.character-light img {
+    height: 200px;
+    border-radius: 50%;
+    border: solid black 1px;
+}
+
 .character-name {
     font-size: 24px;
     font-weight: 700;

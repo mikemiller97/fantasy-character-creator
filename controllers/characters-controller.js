@@ -103,7 +103,7 @@ const patchCharacter = async (req, res, next) => {
         throw new HttpError("Invalid input, please check your input", 422)
     }
     
-    const { name, race, sex, profession, playerClass, picture, bio, alignment, age, publicId, pictureChanged, oldPublicId } = req.body
+    const { name, race, sex, profession, playerClass, picture, bio, alignmentLaw, alignmentMoral, age, publicId, pictureChanged, oldPublicId } = req.body
     const characterId = req.params.cid
 
     if (pictureChanged && oldPublicId !== "") {
@@ -131,7 +131,8 @@ const patchCharacter = async (req, res, next) => {
     updatedCharacter.playerClass = playerClass
     updatedCharacter.picture = picture
     updatedCharacter.bio = bio
-    updatedCharacter.alignment = alignment
+    updatedCharacter.alignmentLaw = alignmentLaw
+    updatedCharacter.alignmentMoral = alignmentMoral
     updatedCharacter.age = age
     updatedCharacter.publicId = publicId
 

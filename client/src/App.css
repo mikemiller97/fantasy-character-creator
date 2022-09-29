@@ -1,13 +1,19 @@
+* {
+  overscroll-behavior: none;
+}
+
 .App {
   text-align: center;
   background-color: #121212;
   overflow-y: auto;
+  height: 100vh;
 }
 
 .App-light {
   background-color: #DEE4E7;
   text-align: center;
   overflow-y: auto;
+  height: 100vh;
 }
 
 .App-logo {
