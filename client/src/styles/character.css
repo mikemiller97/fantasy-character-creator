@@ -7,6 +7,8 @@
     flex-direction: column;
     align-items: center;
     height:fit-content;
+    word-wrap: break-word;
+    word-break: break-all;
 }
 
 .character-light {
@@ -20,6 +22,8 @@
     height:fit-content;
     border: 1px solid black;
     box-shadow: 1px 1px lightgrey;
+    word-wrap: break-word;
+    word-break: break-all;
 }
 
 .bio {
@@ -30,7 +34,7 @@
 
 .bio p {
     width: 210px;
-    word-wrap: break-word; 
+    word-wrap: break-word;
 }
 
 .character img {

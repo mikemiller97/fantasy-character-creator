@@ -53,3 +53,16 @@
     color: black;
     cursor: pointer;
 }
+
+@media only screen and (max-width: 650px) {
+    .options {
+        background-color: #404040;
+        padding: 0px;
+        width: 100%;
+    }
+
+    .options-light {
+        padding: 0px;
+        width: 100%;
+    }
+} 

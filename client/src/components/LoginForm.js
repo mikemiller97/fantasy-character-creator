@@ -73,6 +73,7 @@ export default function LoginForm(props) {
                 <div className="login-info">
                     <label htmlFor="emailLogIn">E-mail</label>
                     <input
+                        type="email"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}

@@ -152,3 +152,12 @@
 .button-4:-webkit-details-marker {
   display: none;
 }
+
+@media only screen and (max-width: 650px) {
+  .character-creation {
+    box-sizing: padding-box;
+    -moz-box-sizing: padding-box;
+    -webkit-box-sizing: padding-box;
+    padding-bottom: 100px;
+  }
+}

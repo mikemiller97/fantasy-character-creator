@@ -14,9 +14,9 @@ export default function Nav() {
     return (
         <nav className={"navbar"}>
             <ul className={auth.darkMode ? "options" : "options-light"}>
-                <Link to="/" style={{ textDecoration: 'none' }}><li>Character list</li></Link>
-                <Link to="/create" style={{ textDecoration: 'none' }}><li>Create character</li></Link>
-                <Link to="/settings" style={{ textDecoration: 'none' }}><li>Settings</li></Link>
+                <Link to="/" style={{ textDecoration: 'none' }}><li>Character List</li></Link>
+                <Link to="/create" style={{ textDecoration: 'none' }}><li>Create Character</li></Link>
+                <Link to="/settings" style={{ textDecoration: 'none' }}><li>Adjust Settings</li></Link>
                 <li onClick={handleLogout}>Log out</li>
             </ul>
         </nav>
