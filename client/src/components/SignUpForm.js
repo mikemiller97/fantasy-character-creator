@@ -76,7 +76,7 @@ export default function SignUpForm(props) {
                 <div className="signup-info">
                     <label htmlFor="emailSignUp">Email</label>
                     <input 
-                        type="text"
+                        type="email"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}

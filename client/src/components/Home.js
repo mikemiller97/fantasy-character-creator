@@ -46,6 +46,7 @@ export default function Home() {
 
     const loadCharacters = useCallback(async (e) => {
         setIsLoading(true)
+        window.scrollTo(0, 0)
 
         try {
             const response = await fetch(`/api/characters/userid/${auth.userId}`, {
