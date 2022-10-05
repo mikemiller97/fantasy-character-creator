@@ -21,10 +21,22 @@ export default function Settings() {
         }
     })
     
+    // Changes to light mode
+    const switchToLight = () => {
+        localStorage.setItem("darkMode", "")
+        auth.setDarkMode(false)
+    }
+
+    // Changes to dark mode
+    const switchToDark = () => {
+        localStorage.setItem("darkMode", true)
+        auth.setDarkMode(true)
+    }
+
     return (
         <div className={auth.darkMode ? "settings" : "settings-light"}>
             <h1 style={auth.darkMode ? {color: "white"} : {color: "black"}}>Settings</h1>
-            {auth.darkMode ? <button className="button-6" onClick={() => auth.setDarkMode(false)}>Light Mode</button> : <button className="button-18" onClick={() => {auth.setDarkMode(true)}}>Dark Mode</button>}
+            {auth.darkMode ? <button className="button-6" onClick={switchToLight}>Light Mode</button> : <button className="button-18" onClick={switchToDark}>Dark Mode</button>}
             <button className={auth.darkMode? "button-6" : "button-18"} onClick={showChangePassword || showDeleteAccount ? () => { return } : () => setShowChangeEmail(true)}>Change E-mail</button>
             <button className={auth.darkMode? "button-6" : "button-18"} onClick={showChangeEmail || showDeleteAccount ? () => { return } : () => setShowChangePassword(true)}>Change Password</button>
             <button className={auth.darkMode? "button-6" : "button-18"} onClick={showChangeEmail || showChangePassword ? () => { return } : () => setShowDeleteAccount(true)}>Delete Account</button>

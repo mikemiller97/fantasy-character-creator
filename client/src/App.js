@@ -18,18 +18,17 @@ import EditCharacter from './components/EditCharacter';
 let logoutTimer
 
 function App() {
-  const initializeState = () => !!JSON.parse(localStorage.getItem("userData"));
-
+  const initializeState = () => !!JSON.parse(localStorage.getItem("userData"))
   const [token, setToken] = React.useState(initializeState)
   const [userId, setUserId] = React.useState(null)
   const [tokenExpirationDate, setTokenExpirationDate] = React.useState()
-  const [darkMode, setDarkMode] = React.useState(true)
+  const [darkMode, setDarkMode] = React.useState(localStorage.getItem("darkMode"))
 
   // Logs in and sets token
   const login = useCallback((uid, token, expirationDate) => {
     setToken(token)
     setUserId(uid)
-    const tokenExpirationDate =  expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60)
+    const tokenExpirationDate =  expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60 * 24)
     setTokenExpirationDate(tokenExpirationDate)
     localStorage.setItem("userData", JSON.stringify({
       userId: uid, 

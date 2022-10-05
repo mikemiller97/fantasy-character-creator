@@ -48,6 +48,7 @@ export default function Home() {
         setIsLoading(true)
         window.scrollTo(0, 0)
 
+        console.log(localStorage.getItem("userData"))
         try {
             const response = await fetch(`/api/characters/userid/${auth.userId}`, {
                 headers: {
@@ -66,6 +67,10 @@ export default function Home() {
         } catch (err) {
             if (err.message.includes("is not valid JSON")) {
                 err.message = "Error: could not connect to server"
+            }
+
+            if (err.message.includes("Authentication failed")) {
+                auth.logout()
             }
 
             setServerError(err.message || "Something went wrong please try again")
