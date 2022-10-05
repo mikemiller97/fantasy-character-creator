@@ -48,7 +48,6 @@ export default function Home() {
         setIsLoading(true)
         window.scrollTo(0, 0)
 
-        console.log(localStorage.getItem("userData"))
         try {
             const response = await fetch(`/api/characters/userid/${auth.userId}`, {
                 headers: {
@@ -78,7 +77,7 @@ export default function Home() {
         setShowWarning(false)
         setIsLoading(false)
         setCharacterListChange(prev => prev++)
-    },[auth.token, auth.userId])
+    },[auth])
 
     const cancelDelete = () => {
         setSelectedDelete("")
